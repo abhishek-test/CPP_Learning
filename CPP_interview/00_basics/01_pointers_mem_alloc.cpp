@@ -15,8 +15,8 @@ int main()
     unsigned char *ptrC = (unsigned char*)calloc(count, sizeof(unsigned char)); // 0
     int *ptrN = new int[count];  // stores garbage, use[] for chunk of memory
 
-    // setting memory
-    memset(ptrC, 55, count*sizeof(unsigned char));  // use ptrM, ptrC or ptrN only for zero init
+    // sets each byte to 55 not each int, give garbage values
+    memset(ptrC, 55, count*sizeof(unsigned char)); 
 
     // or set to a fixed value
     fill(ptrN, ptrN + count, 149);
@@ -27,6 +27,17 @@ int main()
     }   
 
     free(ptrM);
-    free(ptrC); // delete(ptrC) can also be used 
+    free(ptrC);    // delete(ptrC) can also be used 
     delete[] ptrN; // use delete[] for chunk of blocks else use delete
+
+    // pointer arithmetic
+    int arr[] = {10, 20, 30};
+    int* ptr = arr;
+
+    // Dereference the current pointer, then increment the pointer
+    cout << *ptr++ << endl;  // Outputs 10, ptr now at arr[1]
+
+    // Increment the pointer first, then dereference
+    cout << *++ptr << endl;  // ptr moves to arr[2], outputs 30
+
 }
