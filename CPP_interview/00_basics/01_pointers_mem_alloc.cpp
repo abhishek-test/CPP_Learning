@@ -3,11 +3,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <cstring>
+#include <array>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
+    // array - fixed size in modern C++
+    std::array<int, 5> myArr; // = {3,5,1,2,4};
+    myArr.fill(10);
+    std::sort(myArr.begin(), myArr.end());
+    
+    for (int x : myArr)
+        cout << x << " ";
+    cout << std::endl;
+
     // normal pointer and dynamic mem allocation
     int count = 10;
 
