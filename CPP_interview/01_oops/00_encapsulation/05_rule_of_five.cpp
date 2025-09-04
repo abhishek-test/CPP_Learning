@@ -17,13 +17,15 @@ public:
     // Destructor
     ~ResourceManager() { delete[] data; }
 
-    // Copy Constructor
+    // Copy Constructor - create new object using existing one
+    // Deep copy - both hold individual copies of data, point to different memory
     ResourceManager(const ResourceManager& other)
         : data(new int[other.size])
         , size(other.size)
     { copy(other.data, other.data + other.size, data); }
 
-    // Copy Assignment Operator
+    // Copy Assignment Operator - copies data from one to another (both existing already - of diff size ??)
+    // Deep copy - both hold individual copies of data, point to different memory
     ResourceManager& operator=(const ResourceManager& other)
     {
         if (this != &other) {
@@ -35,7 +37,9 @@ public:
         return *this;
     }
 
-    // Move Constructor
+    // Move Constructor - new obj points to other's resources, other is set to null
+    // new obj owns the memory, other is left in valid but empty state
+    // move - just transfer of resource (not a shallow copy)
     ResourceManager(ResourceManager&& other) noexcept
         : data(other.data),
           size(other.size)
@@ -68,7 +72,7 @@ int main()
     ResourceManager obj2 = obj1;
 
     // Creating an object using Copy assignment operator
-    ResourceManager obj3;
+    ResourceManager obj3(10);
     obj3 = obj1;
 
     // Creating an object using Move constructor
