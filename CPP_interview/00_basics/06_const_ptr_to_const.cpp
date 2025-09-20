@@ -9,7 +9,7 @@ int main()
 	int y = 50;
 
 	// pointer to a const -> 
-	// can't change the const but can change to point to sth else
+	// can't change the const but can change to pointer to sth else
 	const int* ptr_to_const = &x;
 	//*ptr_to_const = 20;  // wrong
 	ptr_to_const = &y;

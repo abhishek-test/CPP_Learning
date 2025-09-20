@@ -11,7 +11,6 @@ int main() {
   // push elements into the stack
   colors.push("Red");
   colors.push("Orange");
-
   
   cout << "Stack: ";
 
