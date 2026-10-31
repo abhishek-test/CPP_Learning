@@ -2,6 +2,16 @@
 #include <utility> // for using move
 using namespace std;
 
+// Rule of Five: If a class manages resources (like dynamic memory), 
+// it should define all five special member functions: destructor, copy constructor, 
+// copy assignment operator, move constructor, and move assignment operator. 
+// This ensures proper resource management and avoids issues like double deletion or memory leaks.
+
+// if there is no resource management, then we can rely on compiler generated special member functions
+// Rule of Zero comes in, which states that if a class does not manage resources, 
+// it should not define any of the special member functions,
+// and instead rely on the compiler-generated versions. This leads to simpler and more maintainable code
+
 class ResourceManager {
 private:
     int* data;

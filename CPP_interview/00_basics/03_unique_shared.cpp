@@ -3,6 +3,9 @@
 
 using namespace std;
 
+// When the unique_ptr goes out of scope, its destructor automatically releases the underlying resource, 
+// implementing RAII (Resource Acquisition Is Initialization) with zero performance overhead over raw pointers
+
 class MyClass {
 private:
     int x;
@@ -11,6 +14,12 @@ public:
     int getX() { return x; }
     ~MyClass() { cout << "Destructor called " << endl; }
 };
+
+void processAndDestroy(std::unique_ptr<MyClass> ptr) {
+    // Use the object pointed to by ptr
+    cout << "Processing MyClass with x = " << ptr->getX() << endl;
+    // When this function exits, ptr goes out of scope and the MyClass object is automatically destroyed
+}
 
 int main()
 {
@@ -38,7 +47,7 @@ int main()
 
     cout << p3->getX() << endl;
 
-    MyClass *p4 = p3.release();  // returns pointer to object and release ownership from p3 which is nullptr now
+    //MyClass *p4 = p3.release();  // returns pointer to object and release ownership from p3 which is nullptr now
 
     // ******************** unique pointer with array of ints ****************************
     const size_t size = 5;
@@ -55,5 +64,8 @@ int main()
     for (size_t i = 0; i < size; ++i) {
         std::cout << arr[i] << " ";  // Output: 42 42 42 42 42
     }
+
+    processAndDestroy(std::move(p3));  // ownership of p3 is transferred to the function, p3 is nullptr now
+    // if processAndDestroy() had & then p3 would not be nullptr after the function call
 
 }
